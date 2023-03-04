@@ -7,7 +7,7 @@ interface IERC20 {
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
 }
 
-contract Staking {
+contract  BrainStormersStaking {
     mapping(address => uint256) private balances;
     mapping(address => uint256) private lastUpdateTime;
     mapping(address => uint256) private rewards;
