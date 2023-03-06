@@ -1,5 +1,5 @@
 const { ethers } = require("hardhat");
-const { assert } = require("chai");
+const { assert, expect } = require("chai");
 
 describe("BrainStormers", function () {
   it("should allow users to stake, withdraw and claim", async function () {
@@ -20,25 +20,35 @@ describe("BrainStormers", function () {
     const contract = staking.connect(user1);
     const contract2 = staking.connect(user2);
 
-    token.transfer(user1.address, 80);
-    token.transfer(user2.address, 40);
+    token.transfer(user1.address, ethers.utils.parseEther("80"));
+    token.transfer(user2.address, ethers.utils.parseEther("40"));
     const values = await token.balanceOf(user1.address);
     const valuess = await token.balanceOf(deployer.address);
     console.log(values, valuess);
 
     // Pledge 50 tokens from user1 and 50 tokens from user2
-    await token.connect(user1).approve(staking.address, 70);
+    await token
+      .connect(user1)
+      .approve(staking.address, ethers.utils.parseEther("70"));
 
-    await contract.stake(70);
+    await contract.stake(ethers.utils.parseEther("70"));
 
-    await token.connect(user2).approve(staking.address, 30);
-    await contract2.stake(30);
+    await token
+      .connect(user2)
+      .approve(staking.address, ethers.utils.parseEther("30"));
+    await contract2.stake(ethers.utils.parseEther("30"));
 
     // Check that the user's stake was recorded correctly
-    assert.equal(await contract.balances(user1.address), 70);
+
+    const balOne = await contract.balances(user1.address);
+
+    expect(balOne).to.equal(ethers.utils.parseEther("70"));
 
     // Check that the total funds staked is 100
-    assert.equal(await contract.totalStaked(), 100);
+
+    const totalStaked = await contract.totalStaked();
+
+    expect(totalStaked).to.equal(ethers.utils.parseEther("100"));
 
     const rewards = await contract.getReward(user1.address);
     console.log(rewards);
