@@ -26,7 +26,6 @@ describe("BrainStormers", function () {
     const valuess = await token.balanceOf(deployer.address);
     console.log(values, valuess);
 
-    // Pledge 50 tokens from user1 and 50 tokens from user2
     await token
       .connect(user1)
       .approve(staking.address, ethers.utils.parseEther("70"));

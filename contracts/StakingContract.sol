@@ -92,7 +92,6 @@ contract BrainStormersStaking {
 
         rewards[msg.sender] = 0;
         lastUpdateTime[msg.sender] = block.timestamp;
-
         IERC20(rewardToken).transfer(msg.sender, reward);
 
         emit RewardClaimed(msg.sender, reward, block.timestamp);
