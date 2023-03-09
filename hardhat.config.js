@@ -1,6 +1,3 @@
-require("@nomicfoundation/hardhat-toolbox");
-
-/** @type import('hardhat/config').HardhatUserConfig */
 require("@nomiclabs/hardhat-waffle");
 require("dotenv").config({ path: ".env" });
 
@@ -10,15 +7,12 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY;
 module.exports = {
   solidity: "0.8.13",
   networks: {
-    hardhat:{
-      chainId:1337
+    hardhat: {
+      chainId: 1337,
     },
-    mumbai:{
-      url:ANKR_ID,
-      accounts:[PRIVATE_KEY],
+    mumbai: {
+      url: ANKR_ID,
+      accounts: [PRIVATE_KEY],
     },
   },
- 
-  
 };
-

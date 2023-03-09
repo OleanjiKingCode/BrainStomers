@@ -29,7 +29,6 @@ describe("BrainStormers", function () {
     await token
       .connect(user1)
       .approve(staking.address, ethers.utils.parseEther("70"));
-
     await contract.stake(ethers.utils.parseEther("70"));
 
     await token
@@ -38,26 +37,24 @@ describe("BrainStormers", function () {
     await contract2.stake(ethers.utils.parseEther("30"));
 
     // Check that the user's stake was recorded correctly
-
     const balOne = await contract.balances(user1.address);
-
     expect(balOne).to.equal(ethers.utils.parseEther("70"));
 
     // Check that the total funds staked is 100
-
     const totalStaked = await contract.totalStaked();
-
     expect(totalStaked).to.equal(ethers.utils.parseEther("100"));
 
     const rewards = await contract.getReward(user1.address);
     console.log(rewards);
-    // // Connect to the contract using the signer for the project owner
-    // const ownerContract = staking.connect(user3);
 
-    // // Withdraw the funds
-    // await ownerContract.withdrawFunds();
-
-    // // Check that the project owner received the funds
-    // assert.equal(await token.balanceOf(user3.address), 100);
+    if (parseInt(rewards.value) > 1000) {
+      await contract.claimReward();
+      const values = await token.balanceOf(user1.address);
+      expect(values).to.greaterThan(ethers.utils.parseEther("1000"));
+    } else {
+      await contract.withdraw();
+      const values = await token.balanceOf(user1.address);
+      expect(values).to.equal(ethers.utils.parseEther("80"));
+    }
   });
 });
