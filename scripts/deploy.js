@@ -11,7 +11,7 @@ async function main() {
   const staking = await Staking.deploy(
     10,
     100000,
-    0x027D704225f61176EF49D7d717bE3349f37384A2,
+    "0x027D704225f61176EF49D7d717bE3349f37384A2",
     token.address,
     token.address
   );
