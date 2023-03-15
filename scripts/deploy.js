@@ -16,13 +16,21 @@ async function main() {
     token.address
   );
   await staking.deployed();
+
   console.log("BrainStormersStaking deployed to:", staking.address);
+
+  const Reawrdsys = await ethers.getContractFactory("BrainStormersreawrdsys");
+  const reawrdsys = await Reawrdsys.deploy(
+    "0x0552D756a3E92Aa874EF60F61b7a29030373e869"
+  );
+  await reawrdsys.deployed();
 
   filesys.writeFileSync(
     "./constant.js",
     `
   export const BrainStormersAddress ="${staking.address}"
   export const StakingTokenAddress ="${token.address}"
+  export const RWSYS ="${reawrdsys.address}"
   `
   );
 }
