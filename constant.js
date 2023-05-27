@@ -1,4 +1,4 @@
-
-  export const BrainStormersAddress ="0x539bdE2298F1Bc09C58E56442B6251699f32a764"
-  export const StakingTokenAddress ="0x8fB67d9fd499Aed77b9DBad3a2b2141189bF7026"
-  
+export const BrainStormersAddress =
+  "0x1123CcdD07419e0e99637567576A16AE5830E4d9";
+export const StakingTokenAddress = "0x32a3f61981Ba6569b493cC917208091b642Dc734";
+export const RWSYS = "0xf506E07F6B257326aE614013264f51b865Ff9334";
